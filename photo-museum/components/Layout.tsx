@@ -1,25 +1,29 @@
-import React, { ReactNode } from "react";
-import Head from "next/head";
-import styles from "../styles/Layout.module.css";
+import Link from "next/link";
+import styles from '../styles/Layout.module.css'
 
-type Props = {
-  children: any,
-  currentPage: string,
+export enum Page {
+    GALLERY = 0,
+    UPLOAD,
+    SEARCH
 }
 
-const Layout = ({ children, currentPage} : Props) => {
-  return (
-    <div>
-      <Head>
-        <title>Photo Museum</title>
-        <link rel="icon" href="TODO" />
-      </Head>
-      <div className={styles.container}>
-        {children}
+type Props = {
+    children: any,
+    currentPage: Page //TODO: unused attribute. Use this to bold current page
+}
 
-      </div>
-    </div>
-  );
+const Layout = ({ children, currentPage }: Props) => {
+    return (
+        < div >
+            <nav className={styles.navItem}>
+                <Link href="/gallery">Gallery | </Link> 
+                <Link href="/upload">Upload | </Link> 
+                <Link href="/search">Search</Link>
+            </nav>
+
+            {children}
+        </div >
+    );
 };
 
 export default Layout;
